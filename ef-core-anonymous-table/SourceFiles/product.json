@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Product01",
+    "qty": 10,
+    "price": 15,
+    "isAvailable": true
+  },
+  {
+    "name": "Product02",
+    "qty": 20,
+    "price": 25,
+    "isAvailable": true
+  },
+  {
+    "name": "Product03",
+    "qty": 30,
+    "price": 35,
+    "isAvailable": true
+  },
+  {
+    "name": "Product04",
+    "qty": 40,
+    "price": 45,
+    "isAvailable": true
+  },
+  {
+    "name": "Product05",
+    "qty": 50,
+    "price": 55,
+    "isAvailable": true
+  },
+  {
+    "name": "Product06",
+    "qty": 60,
+    "price": 65,
+    "isAvailable": true
+  },
+  {
+    "name": "Product07",
+    "qty": 70,
+    "price": 75,
+    "isAvailable": true
+  },
+  {
+    "name": "Product08",
+    "qty": 80,
+    "price": 85,
+    "isAvailable": true
+  },
+  {
+    "name": "Product09",
+    "qty": 90,
+    "price": 95,
+    "isAvailable": true
+  },
+  {
+    "name": "Product10",
+    "qty": 100,
+    "price": 105,
+    "isAvailable": true
+  }
+]
