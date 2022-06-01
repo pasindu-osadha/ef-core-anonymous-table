@@ -32,5 +32,40 @@ namespace ef_core_anonymous_table.Controllers
             _context.SaveChanges();
             return Ok();
         }
+
+        [HttpPost]
+        [Route("updatePrice")]
+        public ActionResult upadteProductPrice(List<UpdateProductPriceReq> ListOfReq)
+        {
+            foreach (var req in ListOfReq)
+            {
+                var p = _context.Products.FirstOrDefault(c => c.Id == req.ID);
+                if (p != null)
+                {
+                    p.Price = req.Price;
+                }
+            }
+            _context.SaveChanges();
+
+            //foreach (var req in ListOfReq)
+            //{
+            //    var p = _context.Products.FirstOrDefault(c => c.Id == req.ID);
+            //    if (p != null)
+            //    {
+            //        p.Price = req.Price;
+            //    }
+            //    _context.Products.Update(p);
+            //}
+            //_context.SaveChanges();
+
+
+            return Ok();
+        }
+    }
+
+    public class UpdateProductPriceReq
+    {
+        public int ID { get; set; }
+        public double Price { get; set; }
     }
 }
