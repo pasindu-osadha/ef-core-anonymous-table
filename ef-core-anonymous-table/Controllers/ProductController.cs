@@ -20,6 +20,7 @@ namespace ef_core_anonymous_table.Controllers
         public ActionResult getAllProducts()
         {
             var a = _context.Products.ToList();
+            //var a = _context.PriceUpdateViews.ToList();
             return Ok(a);
         }
         [HttpPost]
