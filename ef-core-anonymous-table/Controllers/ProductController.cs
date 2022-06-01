@@ -38,6 +38,8 @@ namespace ef_core_anonymous_table.Controllers
         [Route("updatePrice")]
         public ActionResult upadteProductPrice(List<UpdateProductPriceReq> ListOfReq)
         {
+            //bulk update method 
+
             foreach (var req in ListOfReq)
             {
                 var p = _context.Products.FirstOrDefault(c => c.Id == req.ID);
@@ -47,6 +49,8 @@ namespace ef_core_anonymous_table.Controllers
                 }
             }
             _context.SaveChanges();
+
+            // update using update keyword 
 
             //foreach (var req in ListOfReq)
             //{
@@ -59,6 +63,18 @@ namespace ef_core_anonymous_table.Controllers
             //}
             //_context.SaveChanges();
 
+            // update using views  - we can not proceed because Ef core Doesn't support update views 
+           
+            //foreach (var req in ListOfReq)
+            //{
+            //    var p = _context.PriceUpdateViews.FirstOrDefault(c => c.Id == req.ID);
+            //    if (p != null)
+            //    {
+            //        p.Price = req.Price;
+            //        _context.PriceUpdateViews.Update(p);
+            //    }
+            //}
+            //_context.SaveChanges();
 
             return Ok();
         }
