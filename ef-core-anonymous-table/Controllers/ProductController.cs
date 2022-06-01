@@ -1,4 +1,5 @@
-﻿using ef_core_anonymous_table.Data;
+﻿using AutoMapper;
+using ef_core_anonymous_table.Data;
 using ef_core_anonymous_table.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@ namespace ef_core_anonymous_table.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ProductDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductController(ProductDbContext context)
+        public ProductController(ProductDbContext context,IMapper mapper)
         {
             _context = context;
+            _mapper=mapper;
         }
         [HttpGet]
         public ActionResult getAllProducts()
@@ -38,19 +41,19 @@ namespace ef_core_anonymous_table.Controllers
         [Route("updatePrice")]
         public ActionResult upadteProductPrice(List<UpdateProductPriceReq> ListOfReq)
         {
-            //bulk update method 
+            //method 01 - bulk update method 
 
-            foreach (var req in ListOfReq)
-            {
-                var p = _context.Products.FirstOrDefault(c => c.Id == req.ID);
-                if (p != null)
-                {
-                    p.Price = req.Price;
-                }
-            }
-            _context.SaveChanges();
+            //foreach (var req in ListOfReq)
+            //{
+            //    var p = _context.Products.FirstOrDefault(c => c.Id == req.ID);
+            //    if (p != null)
+            //    {
+            //        p.Price = req.Price;
+            //    }
+            //}
+            //_context.SaveChanges();
 
-            // update using update keyword 
+            // method 02 - update using update keyword 
 
             //foreach (var req in ListOfReq)
             //{
@@ -63,7 +66,7 @@ namespace ef_core_anonymous_table.Controllers
             //}
             //_context.SaveChanges();
 
-            // update using views  - we can not proceed because Ef core Doesn't support update views 
+            // method 03 - update using views  - we can not proceed because Ef core Doesn't support update views 
            
             //foreach (var req in ListOfReq)
             //{
@@ -75,6 +78,21 @@ namespace ef_core_anonymous_table.Controllers
             //    }
             //}
             //_context.SaveChanges();
+
+            //method 04 - update using automapper method 
+
+            foreach(var req in ListOfReq)
+            {
+                var p = _context.Products.FirstOrDefault(p=>p.Id == req.ID);
+                if(p != null)
+                {
+                    var result = _mapper.Map<Product>(p);
+                    _context.Products.Update(result);    
+                }
+                
+            }
+            _context.SaveChanges();
+
 
             return Ok();
         }
